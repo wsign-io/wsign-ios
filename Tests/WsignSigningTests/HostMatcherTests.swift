@@ -3,7 +3,7 @@ import XCTest
 
 final class HostMatcherTests: XCTestCase {
     func testNormalizeLowercasesTrimsAndDropsTrailingDots() {
-        XCTAssertEqual(HostMatcher.normalize("  WSIGN.com.. "), "wsign.io")
+        XCTAssertEqual(HostMatcher.normalize("  WSIGN.io.. "), "wsign.io")
         XCTAssertEqual(HostMatcher.normalize("[::1]"), "::1")
         XCTAssertEqual(HostMatcher.normalize(""), "")
         XCTAssertEqual(HostMatcher.normalize("."), "")
@@ -12,7 +12,7 @@ final class HostMatcherTests: XCTestCase {
     func testExactMatch() {
         let patterns: Set<String> = ["wsign.io", "www.wsign.io"]
         XCTAssertTrue(HostMatcher.matches("wsign.io", patterns: patterns))
-        XCTAssertTrue(HostMatcher.matches("WWW.Wsign.Com", patterns: patterns))
+        XCTAssertTrue(HostMatcher.matches("WWW.Wsign.IO", patterns: patterns))
         XCTAssertTrue(HostMatcher.matches("wsign.io.", patterns: patterns))
         XCTAssertFalse(HostMatcher.matches("sign.wsign.io", patterns: patterns))
         XCTAssertFalse(HostMatcher.matches("evilwsign.io", patterns: patterns))
